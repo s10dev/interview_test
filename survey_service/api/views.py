@@ -8,6 +8,7 @@ from django.utils import timezone
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from . import services
+from django.shortcuts import redirect
 
 
 class SurveyViewSet(viewsets.ModelViewSet):
@@ -94,3 +95,8 @@ class watch_completed_surveys(APIView):
         serializer = CompletedSurveySerilizer(data=surveys, many=True)
         serializer.is_valid()
         return Response(serializer.data)
+
+
+def redirect_to_API(request):
+    '''Redirect from localhost to localhost/api/v1/'''
+    return redirect('api/v1/')
