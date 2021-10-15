@@ -4,7 +4,7 @@ from django.db import models
 # Create your models here.
 class Survey(models.Model):
     title = models.CharField(max_length=100)
-    start_date = models.DateTimeField(auto_now_add=True)
+    start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     description = models.TextField(max_length=300)
 
@@ -20,7 +20,11 @@ class Question(models.Model):
     )
     text = models.TextField(max_length=300)
     type = models.CharField(max_length=3, choices=types_of_question)
-    survey = models.ForeignKey(Survey, on_delete=models.CASCADE, related_name='questions')
+    survey = models.ForeignKey(
+        Survey,
+        on_delete=models.CASCADE,
+        related_name='questions'
+        )
 
     def __str__(self):
         return self.text

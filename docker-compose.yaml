@@ -1,0 +1,34 @@
+version: "3"
+
+volumes:
+  postgres_data:
+  static:
+
+services:
+
+  db:
+    image: postgres:12.4
+    env_file:
+      - ./survey_service/survey_service/.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    depends_on:
+      - db
+    volumes:
+      - static:/app/static/
+
+  nginx:
+    image: nginx
+    ports: 
+      - '80:80'
+    depends_on:
+      - db
+      - web
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static:/static/

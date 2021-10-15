@@ -16,7 +16,7 @@ class CompletedSurveySerilizer(serializers.ModelSerializer):
     class Meta:
         model = Completed_survey
         fields = '__all__'
-    
+
     def get_answers(self, obj):
         response = []
         for el in obj.answers.all():

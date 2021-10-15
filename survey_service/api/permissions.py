@@ -7,10 +7,3 @@ class IsSafe(permissions.BasePermission):
             return True
         else:
             return False
-
-
-class IsAdmin(permissions.BasePermission):
-    def has_permission(self, request, view):
-        if request.user.username == '':
-            return False
-        return request.user.is_superuser
