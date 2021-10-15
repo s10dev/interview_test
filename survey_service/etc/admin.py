@@ -14,8 +14,3 @@ class SurveyAdmin(admin.ModelAdmin):
         if obj:
             kwargs['exclude'] = ['start_date']
         return super(SurveyAdmin, self).get_form(request, obj, **kwargs)
-
-
-@admin.register(Completed_survey)
-class CompletedSurveyAdmin(admin.ModelAdmin):
-    pass
